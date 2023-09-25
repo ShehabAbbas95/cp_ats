@@ -1,6 +1,7 @@
 import { ArrowUpTrayIcon } from "@heroicons/react/20/solid";
 import { FC, useState } from "react";
 import Dropzone from "react-dropzone";
+import Container from "./Container";
 
 const ImageUpload: FC = () => {
   const [onDrag, setOnDrag] = useState(false);
@@ -31,11 +32,8 @@ const ImageUpload: FC = () => {
           className="p-5  md:border-transparent md:border-gray-300 md:p-10 "
         >
           <div className="flex flex-col gap-6">
-            <div className="max-w-lg  bg-white border border-gray-200 rounded-2xl shadow  ">
-              <h2 className="bg-[#D0F7FA]  w-full text-left  min-h-[80px] py-6 pl-8 rounded-t-2xl text-2xl font-Poppins font-semibold">
-                Upload cover image
-              </h2>
-              <div className="px-10 py-16">
+            <Container header="Upload cover image">
+              <div className="px-10 pt-16 pb-6">
                 <Dropzone
                   onDrop={() => setLoading(true)}
                   onDropRejected={() => handelRejectedFile()}
@@ -78,7 +76,7 @@ const ImageUpload: FC = () => {
                   )}
                 </Dropzone>
               </div>
-            </div>
+            </Container>
           </div>
         </form>
       </section>
