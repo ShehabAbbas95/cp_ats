@@ -1,23 +1,28 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC } from "react";
 import QuestionType from "./QuestionType";
 import Select from "./Select";
 import DeleteQuestion from "./DeleteQuestion";
 
 interface Props {
+  saveQuestion: React.Dispatch<React.SetStateAction<boolean>>;
   deleteQuestions: React.Dispatch<React.SetStateAction<boolean>>;
+  setQuestionValue: React.Dispatch<React.SetStateAction<string>>;
   showQuestions: boolean;
+  changeSelectionValue: (e: ChangeEvent<HTMLSelectElement>) => void;
+  selectionValue: string;
 }
-const Questions: FC<Props> = ({ deleteQuestions, showQuestions }: Props) => {
-  const [selectionValue, setSelectionValue] = useState<string>("");
-  const changeSelectionValue = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setSelectionValue(value);
-  };
-
+const Questions: FC<Props> = ({
+  deleteQuestions,
+  showQuestions,
+  saveQuestion,
+  setQuestionValue,
+  changeSelectionValue,
+  selectionValue,
+}: Props) => {
   return (
     <>
       {showQuestions && (
-        <div className="max-w-xl mt-2 mb-48 px-4 ">
+        <div className="max-w-xl mt-2  px-4 ">
           <h2 className="bg-[#D0F7FA]  w-full text-left  min-h-[80px] py-6 pl-8 rounded-t-2xl text-2xl font-Poppins font-semibold">
             Questions
           </h2>
@@ -28,9 +33,22 @@ const Questions: FC<Props> = ({ deleteQuestions, showQuestions }: Props) => {
               </p>
               <Select changeSelectionValue={changeSelectionValue} />
             </div>
-            <QuestionType selectionValue={selectionValue} />
-            <div className="mb-8 cursor-pointer">
+            <QuestionType
+              selectionValue={selectionValue}
+              setQuestionValue={setQuestionValue}
+            />
+            <div className="mb-8 cursor-pointer flex flex-row justify-between">
               <DeleteQuestion deleteQuestion={deleteQuestions} />
+              <button
+                type="button"
+                className="text-green-50 text-sm font-semibold font-Poppins  bg-green-700 rounded-md px-3 py-2"
+                onClick={() => {
+                  saveQuestion(true);
+                  deleteQuestions(false);
+                }}
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ const DeleteQuestion: FC<DeleteQuestionProps> = ({
 }: DeleteQuestionProps) => {
   return (
     <div onClick={() => deleteQuestion(false)}>
-      <div className="flex ml-6 gap-3 text-red-800 font-bold">
+      <div className="flex  gap-3 text-red-800 font-bold">
         <XMarkIcon className="w-8 h-8" />
         <p className="mt-1">Delete question</p>
       </div>

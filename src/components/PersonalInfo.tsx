@@ -1,10 +1,9 @@
-import { FC, FormEventHandler, useState } from "react";
+import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import AddQuestion from "./AddQuestion";
 import Container from "./Container";
 import Questions from "./Questions";
-import ToggleSwitch from "./ui/ToggleSwitch";
-import InternalUse from "./ui/InternalUse";
 import { InputField } from "./ui/InputField";
+import { PencilIcon } from "@heroicons/react/24/solid";
 
 interface PersonalInfoTypes {
   firstName: string;
@@ -21,6 +20,15 @@ interface PersonalInfoTypes {
 const PersonalInfo: FC = () => {
   const [personalInfoQuestions, setPersonalInfoQuestions] =
     useState<boolean>(false);
+  const [question, setQuestion] = useState<boolean>(false);
+  const [questionValue, setQuestionValue] = useState<string>("");
+  const [selectionValue, setSelectionValue] = useState<string>("");
+  const changeSelectionValue = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setSelectionValue(value);
+  };
+  // console.log(questionValue);
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -31,7 +39,7 @@ const PersonalInfo: FC = () => {
     console.log(dataObj);
 
     const res = await fetch(
-      `http://127.0.0.1:4010/api/829.08273662867/programs/excepturi/application-form
+      `http://127.0.0.1:4010/api/829.08273662867/programs/shehab/application-form
       `,
       {
         method: "POST",
@@ -76,6 +84,9 @@ const PersonalInfo: FC = () => {
                   phoneNumber: dataObj.gender,
                   internalUse: dataObj.genderInternal,
                   show: dataObj.genderShow,
+                },
+                personalQuestions: {
+                  type: questionValue,
                 },
               },
             },
@@ -138,16 +149,28 @@ const PersonalInfo: FC = () => {
             <InputField id="dateOfBirth" label="Date Of Birth" type="date" />
             <InputField id="gender" label="Gender" />
           </div>
-
-          <div className="cursor-pointer">
-            <AddQuestion addQuestion={setPersonalInfoQuestions} />
-          </div>
+          {question && (
+            <div className="text-left px-8">
+              <p className="flex">
+                {selectionValue}
+                <PencilIcon className="w-4 h-4 ml-2" />
+              </p>
+              <p>{questionValue}</p>
+            </div>
+          )}
           {personalInfoQuestions && (
             <Questions
               showQuestions={personalInfoQuestions}
               deleteQuestions={setPersonalInfoQuestions}
+              saveQuestion={setQuestion}
+              setQuestionValue={setQuestionValue}
+              changeSelectionValue={changeSelectionValue}
+              selectionValue={selectionValue}
             />
           )}
+          <div className="cursor-pointer">
+            <AddQuestion addQuestion={setPersonalInfoQuestions} />
+          </div>
           <button type="submit">Submit</button>
         </form>
       </Container>

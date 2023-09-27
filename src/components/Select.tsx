@@ -9,6 +9,9 @@ const Select = ({ changeSelectionValue }: Props) => {
         className="w-full p-4 bg-white border border-black rounded"
         onChange={changeSelectionValue}
       >
+        <option className="mt-4" value="" disabled>
+          Question Type
+        </option>
         <option className="mt-4" value="paragraph">
           Paragraph
         </option>

@@ -2,9 +2,12 @@ import { ListBulletIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 interface QuestionTypeProps {
   selectionValue: string;
+  setQuestionValue: React.Dispatch<React.SetStateAction<string>>;
 }
-const QuestionType = ({ selectionValue }: QuestionTypeProps) => {
-  console.log(selectionValue);
+const QuestionType = ({
+  selectionValue,
+  setQuestionValue,
+}: QuestionTypeProps) => {
   return (
     <div>
       <div className="text-left font-Poppins text-lg font-semibold leading-5">
@@ -13,9 +16,11 @@ const QuestionType = ({ selectionValue }: QuestionTypeProps) => {
           selectionValue == "yes_no" ||
           selectionValue == "shortAnswer") && (
           <input
+            name="questionValue"
             type="text"
             className="w-full p-4 bg-white border border-black rounded mt-4"
             placeholder="Type here"
+            onChange={(e) => setQuestionValue(e.target.value)}
           />
         )}
         {(selectionValue == "multipleChoice" ||
