@@ -12,21 +12,21 @@ const Select = ({ changeSelectionValue }: Props) => {
         <option className="mt-4" value="" disabled>
           Question Type
         </option>
-        <option className="mt-4" value="paragraph">
+        <option className="mt-4" value="Paragraph">
           Paragraph
         </option>
-        <option className="mt-4 hover:bg-black " value="shortAnswer">
+        <option className="mt-4 hover:bg-black " value="Short answer">
           Short answer
         </option>
-        <option className="mt-4" value="yes_no">
+        <option className="mt-4" value="Yes/No">
           Yes/No
         </option>
-        <option value="dropdown">Dropdown</option>
-        <option value="multipleChoice">Multiple Choice</option>
-        <option value="date">Date</option>
-        <option value="number">Number</option>
-        <option value="fileUpload">File upload</option>
-        <option value="videoQuestion">Video question</option>
+        <option value="Dropdown">Dropdown</option>
+        <option value="Multiple choice">Multiple Choice</option>
+        <option value="Date">Date</option>
+        <option value="Number">Number</option>
+        <option value="File Upload">File upload</option>
+        <option value="Video Question">Video question</option>
       </select>
     </div>
   );

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import QuestionType from "./QuestionType";
 import Select from "./Select";
 import DeleteQuestion from "./DeleteQuestion";
@@ -23,7 +23,7 @@ const Questions: FC<Props> = ({
     <>
       {showQuestions && (
         <div className="max-w-xl mt-2  px-4 ">
-          <h2 className="bg-[#D0F7FA]  w-full text-left  min-h-[80px] py-6 pl-8 rounded-t-2xl text-2xl font-Poppins font-semibold">
+          <h2 className="bg-cyan-100  w-full text-left  min-h-[80px] py-6 pl-8 rounded-t-2xl text-2xl font-Poppins font-semibold">
             Questions
           </h2>
           <div className="flex flex-col gap-10 bg-white px-6 rounded-b-2xl">

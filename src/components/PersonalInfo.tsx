@@ -3,7 +3,7 @@ import AddQuestion from "./AddQuestion";
 import Container from "./Container";
 import Questions from "./Questions";
 import { InputField } from "./ui/InputField";
-import { PencilIcon } from "@heroicons/react/24/solid";
+import Question from "./Question";
 
 interface PersonalInfoTypes {
   firstName: string;
@@ -23,6 +23,13 @@ const PersonalInfo: FC = () => {
   const [question, setQuestion] = useState<boolean>(false);
   const [questionValue, setQuestionValue] = useState<string>("");
   const [selectionValue, setSelectionValue] = useState<string>("");
+  const [questionsArray, setQuestionsArray] = useState<[{}]>([{ dasd: "hh" }]);
+  const queArray = [
+    {
+      selectionValue: "adsd",
+      questionValue: "adsd",
+    },
+  ];
   const changeSelectionValue = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSelectionValue(value);
@@ -39,7 +46,7 @@ const PersonalInfo: FC = () => {
     console.log(dataObj);
 
     const res = await fetch(
-      `http://127.0.0.1:4010/api/829.08273662867/programs/shehab/application-form
+      `http://127.0.0.1:4010/api/366.20479049558713/programs/ratione/application-form
       `,
       {
         method: "POST",
@@ -48,8 +55,8 @@ const PersonalInfo: FC = () => {
         },
         body: JSON.stringify({
           data: {
-            id: "497f6eca-6276-4993-bfeb-52cbbbba6f08",
-            type: "applicationForm",
+            id: "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            type: "applicationFOrm",
             attributes: {
               personalInformation: {
                 firstName: { firstName: dataObj.firstName },
@@ -149,15 +156,7 @@ const PersonalInfo: FC = () => {
             <InputField id="dateOfBirth" label="Date Of Birth" type="date" />
             <InputField id="gender" label="Gender" />
           </div>
-          {question && (
-            <div className="text-left px-8">
-              <p className="flex">
-                {selectionValue}
-                <PencilIcon className="w-4 h-4 ml-2" />
-              </p>
-              <p>{questionValue}</p>
-            </div>
-          )}
+          {queArray.length > 0 && <Question questions={queArray} />}
           {personalInfoQuestions && (
             <Questions
               showQuestions={personalInfoQuestions}
