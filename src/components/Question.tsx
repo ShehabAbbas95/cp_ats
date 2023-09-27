@@ -1,25 +1,25 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
 
 export interface QuestionProps {
-  selectionValue?: string;
-  questionValue?: string;
+  type?: string;
+  question?: string;
 }
 interface Props {
   questions: QuestionProps[];
+  showEdit: boolean;
 }
 
-const Question = ({ questions }: Props) => {
+const Question = ({ questions, showEdit }: Props) => {
   return (
     <div className="text-left px-8">
       {questions.length > 0
         ? questions.map((question, index) => (
             <div className="border-b-2 mt-6" key={index}>
-              <p className="flex">
-                {question.selectionValue}
-                <PencilIcon className="w-4 h-4 ml-2" />
+              <p className="flex justify-between">
+                {question.type}
+                {showEdit && <PencilIcon className="w-4 h-4 ml-2" />}
               </p>
-              <p>{question.questionValue}</p>
+              <p>{question.question}</p>
             </div>
           ))
         : null}

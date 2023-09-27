@@ -1,11 +1,10 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC } from "react";
 import QuestionType from "./QuestionType";
 import Select from "./Select";
 import DeleteQuestion from "./DeleteQuestion";
 import { QuestionProps } from "./Question";
 
 interface Props {
-  saveQuestion: React.Dispatch<React.SetStateAction<boolean>>;
   deleteQuestions: React.Dispatch<React.SetStateAction<boolean>>;
   setQuestionValue: React.Dispatch<React.SetStateAction<string>>;
   showQuestions: boolean;
@@ -18,7 +17,6 @@ interface Props {
 const Questions: FC<Props> = ({
   deleteQuestions,
   showQuestions,
-  saveQuestion,
   setQuestionValue,
   changeSelectionValue,
   selectionValue,
@@ -50,11 +48,10 @@ const Questions: FC<Props> = ({
                 type="button"
                 className="text-green-50 text-sm font-semibold font-Poppins  bg-green-700 rounded-md px-3 py-2"
                 onClick={() => {
-                  saveQuestion(true);
                   deleteQuestions(false);
                   const newQuestion = {
-                    selectionValue,
-                    questionValue,
+                    type: selectionValue,
+                    question: questionValue,
                   };
                   const myArray = [...questionsArray, newQuestion];
                   setQuestionsArray(myArray);

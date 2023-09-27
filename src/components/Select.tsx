@@ -15,17 +15,17 @@ const Select = ({ changeSelectionValue }: Props) => {
         <option className="mt-4" value="Paragraph">
           Paragraph
         </option>
-        <option className="mt-4 hover:bg-black " value="Short answer">
+        <option className="mt-4 hover:bg-black " value="ShortAnswer">
           Short answer
         </option>
-        <option className="mt-4" value="Yes/No">
+        <option className="mt-4" value="YesNo">
           Yes/No
         </option>
         <option value="Dropdown">Dropdown</option>
-        <option value="Multiple choice">Multiple Choice</option>
+        <option value="MultipleChoice">Multiple Choice</option>
         <option value="Date">Date</option>
         <option value="Number">Number</option>
-        <option value="File Upload">File upload</option>
+        <option value="FileUpload">File upload</option>
         <option value="Video Question">Video question</option>
       </select>
     </div>

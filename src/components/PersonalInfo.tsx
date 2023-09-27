@@ -24,6 +24,7 @@ const PersonalInfo: FC = () => {
   const [questionValue, setQuestionValue] = useState<string>("");
   const [selectionValue, setSelectionValue] = useState<string>("");
   const [questionsArray, setQuestionsArray] = useState<QuestionProps[]>([]);
+  const [showEdit, setShowEdit] = useState<boolean>(true);
 
   const changeSelectionValue = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -37,13 +38,14 @@ const PersonalInfo: FC = () => {
     for (const [key, value] of formData.entries()) {
       dataObj[key] = value;
     }
+    dataObj["personalQuestions"] = questionsArray;
     console.log(dataObj);
 
     const res = await fetch(
-      `http://127.0.0.1:4010/api/366.20479049558713/programs/ratione/application-form
+      `http://127.0.0.1:4010/api/803.0986876156022/programs/nihil/application-form
       `,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -86,9 +88,7 @@ const PersonalInfo: FC = () => {
                   internalUse: dataObj.genderInternal,
                   show: dataObj.genderShow,
                 },
-                personalQuestions: {
-                  type: questionValue,
-                },
+                personalQuestions: dataObj.personalQuestions,
               },
             },
           },
@@ -104,7 +104,7 @@ const PersonalInfo: FC = () => {
     <div className="flex justify-center flex-col ">
       <Container header="Personal Information">
         <form
-          action="POST"
+          action="PUT"
           className="w-full mb-8 bg-white rounded-b-2xl"
           onSubmit={handleSubmit}
         >
@@ -150,12 +150,13 @@ const PersonalInfo: FC = () => {
             <InputField id="dateOfBirth" label="Date Of Birth" type="date" />
             <InputField id="gender" label="Gender" />
           </div>
-          {questionsArray.length > 0 && <Question questions={questionsArray} />}
+          {questionsArray.length > 0 && (
+            <Question questions={questionsArray} showEdit={showEdit} />
+          )}
           {personalInfoQuestions && (
             <Questions
               showQuestions={personalInfoQuestions}
               deleteQuestions={setPersonalInfoQuestions}
-              saveQuestion={setQuestion}
               setQuestionValue={setQuestionValue}
               changeSelectionValue={changeSelectionValue}
               selectionValue={selectionValue}
