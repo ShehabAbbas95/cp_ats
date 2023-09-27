@@ -21,13 +21,6 @@ interface PersonalInfoTypes {
 const PersonalInfo: FC = () => {
   const [personalInfoQuestions, setPersonalInfoQuestions] =
     useState<boolean>(false);
-  const [phoneHide, setPhoneHide] = useState<boolean>(true);
-  const [nationalityHide, setNationalityHide] = useState<boolean>(true);
-  const [currentResidenceHide, setCurrentResidenceHide] =
-    useState<boolean>(true);
-  const [idNumberHide, setIdNumberHide] = useState<boolean>(true);
-  const [birthDateHide, setBirthDateHide] = useState<boolean>(true);
-  const [gender, setGender] = useState<boolean>(true);
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
