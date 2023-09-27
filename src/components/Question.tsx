@@ -6,10 +6,9 @@ export interface QuestionProps {
 }
 interface Props {
   questions: QuestionProps[];
-  showEdit: boolean;
 }
 
-const Question = ({ questions, showEdit }: Props) => {
+const Question = ({ questions }: Props) => {
   return (
     <div className="text-left px-8">
       {questions.length > 0
@@ -17,7 +16,7 @@ const Question = ({ questions, showEdit }: Props) => {
             <div className="border-b-2 mt-6" key={index}>
               <p className="flex justify-between">
                 {question.type}
-                {showEdit && <PencilIcon className="w-4 h-4 ml-2" />}
+                {<PencilIcon className="w-4 h-4 ml-2" />}
               </p>
               <p>{question.question}</p>
             </div>

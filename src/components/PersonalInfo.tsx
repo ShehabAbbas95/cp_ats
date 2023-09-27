@@ -5,26 +5,16 @@ import Questions from "./Questions";
 import { InputField } from "./ui/InputField";
 import Question, { QuestionProps } from "./Question";
 
-interface PersonalInfoTypes {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: number;
-  nationality: string;
-  currentResidence: string;
-  idNumber: number;
-  dateOfBirth: Date;
-  gender: string;
+interface Props {
+  applicationForm?: {};
+  setAppl: React.Dispatch<React.SetStateAction<{}>>;
 }
-
-const PersonalInfo: FC = () => {
+const PersonalInfo: FC<Props> = ({ setAppl, applicationForm }: Props) => {
   const [personalInfoQuestions, setPersonalInfoQuestions] =
     useState<boolean>(false);
-  const [question, setQuestion] = useState<boolean>(false);
   const [questionValue, setQuestionValue] = useState<string>("");
   const [selectionValue, setSelectionValue] = useState<string>("");
   const [questionsArray, setQuestionsArray] = useState<QuestionProps[]>([]);
-  const [showEdit, setShowEdit] = useState<boolean>(true);
 
   const changeSelectionValue = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -39,7 +29,7 @@ const PersonalInfo: FC = () => {
       dataObj[key] = value;
     }
     dataObj["personalQuestions"] = questionsArray;
-    console.log(dataObj);
+    setAppl({ ...applicationForm, dataObj });
 
     const res = await fetch(
       `http://127.0.0.1:4010/api/803.0986876156022/programs/nihil/application-form
@@ -150,9 +140,7 @@ const PersonalInfo: FC = () => {
             <InputField id="dateOfBirth" label="Date Of Birth" type="date" />
             <InputField id="gender" label="Gender" />
           </div>
-          {questionsArray.length > 0 && (
-            <Question questions={questionsArray} showEdit={showEdit} />
-          )}
+          {questionsArray.length > 0 && <Question questions={questionsArray} />}
           {personalInfoQuestions && (
             <Questions
               showQuestions={personalInfoQuestions}

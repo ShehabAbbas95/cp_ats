@@ -13,8 +13,8 @@ const QuestionType = ({
       <div className="text-left font-Poppins text-lg font-semibold leading-5">
         <p>Question</p>
         {(selectionValue == "Paragraph" ||
-          selectionValue == "Yes/No" ||
-          selectionValue == "Short answer") && (
+          selectionValue == "YesNo" ||
+          selectionValue == "ShortAnswer") && (
           <input
             name="questionValue"
             type="text"
@@ -23,7 +23,7 @@ const QuestionType = ({
             onChange={(e) => setQuestionValue(e.target.value)}
           />
         )}
-        {(selectionValue == "Multiple choice" ||
+        {(selectionValue == "MultipleChoice" ||
           selectionValue == "Dropdown") && (
           <>
             <input
@@ -50,7 +50,7 @@ const QuestionType = ({
                 Enable Other Option
               </label>
             </div>
-            {selectionValue == "Multiple choice" && (
+            {selectionValue == "MultipleChoice" && (
               <div className="mt-12">
                 <p>Max choice allowed</p>
                 <input
