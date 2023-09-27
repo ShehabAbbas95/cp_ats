@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useState } from "react";
 import QuestionType from "./QuestionType";
 import Select from "./Select";
 import DeleteQuestion from "./DeleteQuestion";
+import { QuestionProps } from "./Question";
 
 interface Props {
   saveQuestion: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,6 +11,9 @@ interface Props {
   showQuestions: boolean;
   changeSelectionValue: (e: ChangeEvent<HTMLSelectElement>) => void;
   selectionValue: string;
+  setQuestionsArray: React.Dispatch<React.SetStateAction<QuestionProps[]>>;
+  questionsArray: QuestionProps[];
+  questionValue: string;
 }
 const Questions: FC<Props> = ({
   deleteQuestions,
@@ -18,6 +22,9 @@ const Questions: FC<Props> = ({
   setQuestionValue,
   changeSelectionValue,
   selectionValue,
+  setQuestionsArray,
+  questionsArray,
+  questionValue,
 }: Props) => {
   return (
     <>
@@ -45,6 +52,12 @@ const Questions: FC<Props> = ({
                 onClick={() => {
                   saveQuestion(true);
                   deleteQuestions(false);
+                  const newQuestion = {
+                    selectionValue,
+                    questionValue,
+                  };
+                  const myArray = [...questionsArray, newQuestion];
+                  setQuestionsArray(myArray);
                 }}
               >
                 Save

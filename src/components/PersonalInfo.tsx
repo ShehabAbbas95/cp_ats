@@ -3,7 +3,7 @@ import AddQuestion from "./AddQuestion";
 import Container from "./Container";
 import Questions from "./Questions";
 import { InputField } from "./ui/InputField";
-import Question from "./Question";
+import Question, { QuestionProps } from "./Question";
 
 interface PersonalInfoTypes {
   firstName: string;
@@ -23,18 +23,12 @@ const PersonalInfo: FC = () => {
   const [question, setQuestion] = useState<boolean>(false);
   const [questionValue, setQuestionValue] = useState<string>("");
   const [selectionValue, setSelectionValue] = useState<string>("");
-  const [questionsArray, setQuestionsArray] = useState<[{}]>([{ dasd: "hh" }]);
-  const queArray = [
-    {
-      selectionValue: "adsd",
-      questionValue: "adsd",
-    },
-  ];
+  const [questionsArray, setQuestionsArray] = useState<QuestionProps[]>([]);
+
   const changeSelectionValue = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSelectionValue(value);
   };
-  // console.log(questionValue);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -156,7 +150,7 @@ const PersonalInfo: FC = () => {
             <InputField id="dateOfBirth" label="Date Of Birth" type="date" />
             <InputField id="gender" label="Gender" />
           </div>
-          {queArray.length > 0 && <Question questions={queArray} />}
+          {questionsArray.length > 0 && <Question questions={questionsArray} />}
           {personalInfoQuestions && (
             <Questions
               showQuestions={personalInfoQuestions}
@@ -165,9 +159,12 @@ const PersonalInfo: FC = () => {
               setQuestionValue={setQuestionValue}
               changeSelectionValue={changeSelectionValue}
               selectionValue={selectionValue}
+              setQuestionsArray={setQuestionsArray}
+              questionsArray={questionsArray}
+              questionValue={questionValue}
             />
           )}
-          <div className="cursor-pointer">
+          <div className="cursor-pointer mt-4">
             <AddQuestion addQuestion={setPersonalInfoQuestions} />
           </div>
           <button type="submit">Submit</button>
